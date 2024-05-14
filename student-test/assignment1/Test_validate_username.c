@@ -1,6 +1,7 @@
 #include "unity.h"
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../../examples/autotest-validate/autotest-validate.h"
 #include "../../assignment-autotest/test/assignment1/username-from-conf-file.h"
 
@@ -14,9 +15,19 @@
 */
 void test_validate_my_username()
 {
-    /**
-     * TODO: Replace the line below with your code here as described above to verify your /conf/username.txt 
-     * config file and my_username() functions are setup properly
-     */
-    TEST_ASSERT_TRUE_MESSAGE(false,"AESD students, please fix me!");
+    char *username_conf       = NULL;
+    char *username_hard_coded = NULL;
+
+    /* 1. Get hard-coded username */
+    username_hard_coded = (char*)my_username(); /* typecast to avoid warning for 'const' */
+
+    /* 2. Read configured username */
+    username_conf = malloc_username_from_conf_file();
+
+    /* 3. Assert equal */
+    TEST_ASSERT_EQUAL_STRING_MESSAGE(username_hard_coded, username_conf, "Hard-coded username does not match configured username!\n");
+
+    /* cleanup resources */
+    free(username_hard_coded);
+    free(username_conf);
 }
