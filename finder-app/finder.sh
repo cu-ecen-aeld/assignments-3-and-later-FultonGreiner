@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 readonly ARGC=$#
 readonly FILESDIR=$1
